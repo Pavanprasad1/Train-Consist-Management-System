@@ -16,7 +16,7 @@ public class TrainApp {
         bogies.add(new Bogie("Sleeper", 72));
         bogies.add(new Bogie("AC Chair", 56));
         bogies.add(new Bogie("First Class", 40));
-        bogies.add(new Bogie("Sleeper", 80)); // duplicate type for grouping
+        bogies.add(new Bogie("Sleeper", 80));
 
         // Display original list
         System.out.println("\nOriginal Bogies:");
@@ -36,19 +36,24 @@ public class TrainApp {
         System.out.println("\nFiltered Bogies (Capacity > 60):");
         System.out.println(filteredBogies);
 
-        // ✅ UC9: Group by bogie type (name)
+        // UC9: Group
         Map<String, List<Bogie>> groupedBogies = bogies.stream()
                 .collect(Collectors.groupingBy(Bogie::getName));
 
-        // Display grouped result
         System.out.println("\nGrouped Bogies by Type:");
-
         for (Map.Entry<String, List<Bogie>> entry : groupedBogies.entrySet()) {
             System.out.println(entry.getKey() + " -> " + entry.getValue());
         }
 
-        // Show original list unchanged
-        System.out.println("\nOriginal List After Grouping (unchanged):");
+        // ✅ UC10: Calculate total capacity
+        int totalCapacity = bogies.stream()
+                .map(b -> b.getCapacity())   // extract capacity
+                .reduce(0, Integer::sum);    // sum all values
+
+        System.out.println("\nTotal Seating Capacity of Train: " + totalCapacity);
+
+        // Original list unchanged
+        System.out.println("\nOriginal List After Operations:");
         System.out.println(bogies);
     }
 }
