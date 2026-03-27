@@ -4,6 +4,7 @@ import model.Bogie;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TrainApp {
 
@@ -14,22 +15,31 @@ public class TrainApp {
         // Create list of bogies
         List<Bogie> bogies = new ArrayList<>();
 
-        // Add bogies
         bogies.add(new Bogie("Sleeper", 72));
         bogies.add(new Bogie("AC Chair", 56));
         bogies.add(new Bogie("First Class", 40));
 
-        // Display before sorting
-        System.out.println("\nBefore Sorting:");
+        // Display original list
+        System.out.println("\nOriginal Bogies:");
         System.out.println(bogies);
 
-        // Sort by capacity
+        // Sort (UC7)
         bogies.sort(Comparator.comparingInt(Bogie::getCapacity));
 
-        // Display after sorting
-        System.out.println("\nAfter Sorting by Capacity:");
+        System.out.println("\nSorted Bogies:");
         System.out.println(bogies);
 
-        System.out.println("\nSystem sorts bogies based on capacity.");
+        // ✅ UC8: Filter bogies with capacity > 60
+        List<Bogie> filteredBogies = bogies.stream()
+                .filter(b -> b.getCapacity() > 60)
+                .collect(Collectors.toList());
+
+        // Display filtered list
+        System.out.println("\nFiltered Bogies (Capacity > 60):");
+        System.out.println(filteredBogies);
+
+        // Show original list unchanged
+        System.out.println("\nOriginal List After Filtering (unchanged):");
+        System.out.println(bogies);
     }
 }
