@@ -5,6 +5,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import model.GoodsBogie;
+
 
 public class TrainApp {
 
@@ -85,6 +87,37 @@ public class TrainApp {
             System.out.println("Cargo Code is valid: " + cargoCode);
         } else {
             System.out.println("Invalid Cargo Code: " + cargoCode);
+        }
+
+        // ✅ UC12: Safety Compliance Check
+
+
+// Create goods bogies
+        List<GoodsBogie> goodsBogies = new ArrayList<>();
+
+        goodsBogies.add(new GoodsBogie("Cylindrical", "Petroleum")); // valid
+        goodsBogies.add(new GoodsBogie("Open", "Coal"));             // valid
+        goodsBogies.add(new GoodsBogie("Box", "Grain"));             // valid
+        goodsBogies.add(new GoodsBogie("Cylindrical", "Coal"));      // ❌ invalid
+
+// Display goods bogies
+        System.out.println("\nGoods Bogies:");
+        System.out.println(goodsBogies);
+
+// Safety check using allMatch()
+        boolean isSafe = goodsBogies.stream()
+                .allMatch(b -> {
+                    if (b.getType().equals("Cylindrical")) {
+                        return b.getCargo().equals("Petroleum");
+                    }
+                    return true;
+                });
+
+// Display result
+        if (isSafe) {
+            System.out.println("\nTrain is SAFE for operation.");
+        } else {
+            System.out.println("\nTrain is UNSAFE due to invalid cargo!");
         }
     }
 }
