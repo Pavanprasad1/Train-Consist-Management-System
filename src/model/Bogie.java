@@ -5,13 +5,17 @@ public class Bogie {
     private String name;
     private int capacity;
 
-    // Constructor
-    public Bogie(String name, int capacity) {
+    // Constructor with validation
+    public Bogie(String name, int capacity) throws InvalidCapacityException {
+
+        if (capacity <= 0) {
+            throw new InvalidCapacityException("Capacity must be greater than zero");
+        }
+
         this.name = name;
         this.capacity = capacity;
     }
 
-    // Getters
     public String getName() {
         return name;
     }
@@ -20,7 +24,6 @@ public class Bogie {
         return capacity;
     }
 
-    // Display format
     @Override
     public String toString() {
         return name + " (" + capacity + ")";
