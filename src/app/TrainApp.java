@@ -119,5 +119,46 @@ public class TrainApp {
         } else {
             System.out.println("\nTrain is UNSAFE due to invalid cargo!");
         }
+
+        // ✅ UC13: Performance Comparison (Loop vs Stream)
+
+// Create large dataset for testing
+        List<Bogie> largeBogies = new ArrayList<>();
+
+        for (int i = 0; i < 10000; i++) {
+            largeBogies.add(new Bogie("Sleeper", 72));
+            largeBogies.add(new Bogie("AC Chair", 56));
+            largeBogies.add(new Bogie("First Class", 40));
+        }
+
+// 🔹 Loop-based filtering
+        long startLoop = System.nanoTime();
+
+        List<Bogie> loopFiltered = new ArrayList<>();
+        for (Bogie b : largeBogies) {
+            if (b.getCapacity() > 60) {
+                loopFiltered.add(b);
+            }
+        }
+
+        long endLoop = System.nanoTime();
+        long loopTime = endLoop - startLoop;
+
+// 🔹 Stream-based filtering
+        long startStream = System.nanoTime();
+
+        List<Bogie> streamFiltered = largeBogies.stream()
+                .filter(b -> b.getCapacity() > 60)
+                .collect(Collectors.toList());
+
+        long endStream = System.nanoTime();
+        long streamTime = endStream - startStream;
+
+// Display results
+        System.out.println("\nLoop Filtering Result Size: " + loopFiltered.size());
+        System.out.println("Stream Filtering Result Size: " + streamFiltered.size());
+
+        System.out.println("\nLoop Execution Time: " + loopTime + " ns");
+        System.out.println("Stream Execution Time: " + streamTime + " ns");
     }
 }
