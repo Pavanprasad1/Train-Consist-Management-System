@@ -3,6 +3,8 @@ package app;
 import model.Bogie;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 public class TrainApp {
 
@@ -55,5 +57,34 @@ public class TrainApp {
         // Original list unchanged
         System.out.println("\nOriginal List After Operations:");
         System.out.println(bogies);
+
+        // ✅ UC11: Regex Validation
+
+
+// Sample inputs (you can later take from user)
+        String trainId = "TRN-1234";
+        String cargoCode = "PET-AB";
+
+// Define regex patterns
+        Pattern trainPattern = Pattern.compile("TRN-\\d{4}");
+        Pattern cargoPattern = Pattern.compile("PET-[A-Z]{2}");
+
+// Create matchers
+        Matcher trainMatcher = trainPattern.matcher(trainId);
+        Matcher cargoMatcher = cargoPattern.matcher(cargoCode);
+
+// Validate Train ID
+        if (trainMatcher.matches()) {
+            System.out.println("\nTrain ID is valid: " + trainId);
+        } else {
+            System.out.println("\nInvalid Train ID: " + trainId);
+        }
+
+// Validate Cargo Code
+        if (cargoMatcher.matches()) {
+            System.out.println("Cargo Code is valid: " + cargoCode);
+        } else {
+            System.out.println("Invalid Cargo Code: " + cargoCode);
+        }
     }
 }
