@@ -1,9 +1,7 @@
 package app;
 
 import model.Bogie;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class TrainApp {
@@ -18,28 +16,39 @@ public class TrainApp {
         bogies.add(new Bogie("Sleeper", 72));
         bogies.add(new Bogie("AC Chair", 56));
         bogies.add(new Bogie("First Class", 40));
+        bogies.add(new Bogie("Sleeper", 80)); // duplicate type for grouping
 
         // Display original list
         System.out.println("\nOriginal Bogies:");
         System.out.println(bogies);
 
-        // Sort (UC7)
+        // UC7: Sort
         bogies.sort(Comparator.comparingInt(Bogie::getCapacity));
 
         System.out.println("\nSorted Bogies:");
         System.out.println(bogies);
 
-        // ✅ UC8: Filter bogies with capacity > 60
+        // UC8: Filter
         List<Bogie> filteredBogies = bogies.stream()
                 .filter(b -> b.getCapacity() > 60)
                 .collect(Collectors.toList());
 
-        // Display filtered list
         System.out.println("\nFiltered Bogies (Capacity > 60):");
         System.out.println(filteredBogies);
 
+        // ✅ UC9: Group by bogie type (name)
+        Map<String, List<Bogie>> groupedBogies = bogies.stream()
+                .collect(Collectors.groupingBy(Bogie::getName));
+
+        // Display grouped result
+        System.out.println("\nGrouped Bogies by Type:");
+
+        for (Map.Entry<String, List<Bogie>> entry : groupedBogies.entrySet()) {
+            System.out.println(entry.getKey() + " -> " + entry.getValue());
+        }
+
         // Show original list unchanged
-        System.out.println("\nOriginal List After Filtering (unchanged):");
+        System.out.println("\nOriginal List After Grouping (unchanged):");
         System.out.println(bogies);
     }
 }
