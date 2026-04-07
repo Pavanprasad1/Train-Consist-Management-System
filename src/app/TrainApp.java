@@ -163,6 +163,32 @@ public class TrainApp {
 
 // Display sorted result
         System.out.println("Sorted Names: " + Arrays.toString(bogieNames));
+        // ================= UC18: Linear Search =================
+
+        System.out.println("\n--- UC18: Linear Search for Bogie ID ---");
+
+// Array of bogie IDs
+        String[] bogieIds = {"BG101", "BG205", "BG309", "BG412", "BG550"};
+
+// Search key
+        String searchKey = "BG309";  // you can change this for testing
+
+        boolean found = false;
+
+// Linear Search
+        for (String id : bogieIds) {
+            if (id.equals(searchKey)) {
+                found = true;
+                break; // stop when found
+            }
+        }
+
+// Display result
+        if (found) {
+            System.out.println("Bogie ID " + searchKey + " FOUND in the train.");
+        } else {
+            System.out.println("Bogie ID " + searchKey + " NOT FOUND.");
+        }
 
         // ================= FINAL =================
         System.out.println("\n=== SYSTEM EXECUTION COMPLETE ===");
