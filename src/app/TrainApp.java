@@ -148,83 +148,68 @@ public class TrainApp {
         }
 
         System.out.println("Sorted Capacities: " + Arrays.toString(capacities));
-        // ================= UC17: Arrays.sort() =================
 
+        // ================= UC17: Arrays.sort() =================
         System.out.println("\n--- UC17: Sort Bogie Names (Arrays.sort) ---");
 
-// Array of bogie names
         String[] bogieNames = {"Sleeper", "AC Chair", "First Class", "General", "Luxury"};
-
-// Display original
         System.out.println("Original Names: " + Arrays.toString(bogieNames));
 
-// Sort using built-in method
         Arrays.sort(bogieNames);
-
-// Display sorted result
         System.out.println("Sorted Names: " + Arrays.toString(bogieNames));
-        // ================= UC18: Linear Search =================
 
+        // ================= UC20: Defensive Check =================
+        System.out.println("\n--- UC20: Defensive Check Before Search ---");
+
+        if (bogies.isEmpty()) {
+            throw new IllegalStateException("Cannot perform search: Train has no bogies.");
+        }
+
+        // ================= UC18: Linear Search =================
         System.out.println("\n--- UC18: Linear Search for Bogie ID ---");
 
-// Array of bogie IDs
         String[] bogieIds = {"BG101", "BG205", "BG309", "BG412", "BG550"};
-
-// Search key
-        String searchKey = "BG309";  // you can change this for testing
+        String searchKey = "BG309";
 
         boolean found = false;
 
-// Linear Search
         for (String id : bogieIds) {
             if (id.equals(searchKey)) {
                 found = true;
-                break; // stop when found
+                break;
             }
         }
 
-// Display result
-        if (found) {
-            System.out.println("Bogie ID " + searchKey + " FOUND in the train.");
-        } else {
-            System.out.println("Bogie ID " + searchKey + " NOT FOUND.");
-        }
-        // ================= UC19: Binary Search =================
+        System.out.println(found
+                ? "Bogie ID " + searchKey + " FOUND in the train."
+                : "Bogie ID " + searchKey + " NOT FOUND.");
 
+        // ================= UC19: Binary Search =================
         System.out.println("\n--- UC19: Binary Search for Bogie ID ---");
 
-// Sorted array (VERY IMPORTANT for binary search)
         String[] sortedIds = {"BG101", "BG205", "BG309", "BG412", "BG550"};
-
-// Search key
         String key = "BG309";
 
-        int low = 0;
-        int high = sortedIds.length - 1;
+        int low = 0, high = sortedIds.length - 1;
         boolean foundBinary = false;
 
         while (low <= high) {
-
             int mid = (low + high) / 2;
-
             int comparison = key.compareTo(sortedIds[mid]);
 
             if (comparison == 0) {
                 foundBinary = true;
                 break;
             } else if (comparison > 0) {
-                low = mid + 1;   // search right
+                low = mid + 1;
             } else {
-                high = mid - 1;  // search left
+                high = mid - 1;
             }
         }
 
-// Display result
-        if (foundBinary) {
-            System.out.println("Bogie ID " + key + " FOUND using Binary Search.");
-        } else {
-            System.out.println("Bogie ID " + key + " NOT FOUND.");
-        }
+        System.out.println(foundBinary
+                ? "Bogie ID " + key + " FOUND using Binary Search."
+                : "Bogie ID " + key + " NOT FOUND.");
 
         // ================= FINAL =================
         System.out.println("\n=== SYSTEM EXECUTION COMPLETE ===");
