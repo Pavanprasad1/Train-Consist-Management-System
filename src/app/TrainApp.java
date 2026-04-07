@@ -3,6 +3,7 @@ package app;
 import model.Bogie;
 import model.GoodsBogie;
 import model.InvalidCapacityException;
+import model.CargoSafetyException;
 
 import java.util.*;
 import java.util.regex.*;
@@ -106,6 +107,29 @@ public class TrainApp {
 
         System.out.println("\nLoop Time: " + (endLoop - startLoop));
         System.out.println("Stream Time: " + (endStream - startStream));
+
+        // ================= UC15: Safe Cargo Assignment =================
+        System.out.println("\n--- UC15: Safe Cargo Assignment ---");
+
+        GoodsBogie bogie1 = new GoodsBogie("Cylindrical", "None");
+        GoodsBogie bogie2 = new GoodsBogie("Rectangular", "None");
+
+        try {
+            // Safe
+            bogie1.assignCargo("Petroleum");
+            System.out.println("Cargo assigned to Cylindrical bogie: Petroleum");
+
+            // Unsafe
+            bogie2.assignCargo("Petroleum");
+
+        } catch (CargoSafetyException e) {
+            System.out.println("Error: " + e.getMessage());
+
+        } finally {
+            System.out.println("Cargo assignment process completed.");
+        }
+
+        System.out.println("System continues running safely...");
 
         // ================= FINAL =================
         System.out.println("\n=== SYSTEM EXECUTION COMPLETE ===");

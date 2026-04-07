@@ -2,7 +2,7 @@ package model;
 
 public class GoodsBogie {
 
-    private String type;   // Cylindrical / Open / Box
+    private String type;   // Cylindrical / Open / Box / Rectangular
     private String cargo;  // Petroleum / Coal / Grain
 
     public GoodsBogie(String type, String cargo) {
@@ -16,6 +16,17 @@ public class GoodsBogie {
 
     public String getCargo() {
         return cargo;
+    }
+
+    // ✅ ADD THIS METHOD (THIS FIXES YOUR ERROR)
+    public void assignCargo(String cargo) {
+
+        // Rule: Rectangular cannot carry Petroleum
+        if (this.type.equals("Rectangular") && cargo.equals("Petroleum")) {
+            throw new CargoSafetyException("Unsafe: Rectangular bogie cannot carry Petroleum");
+        }
+
+        this.cargo = cargo;
     }
 
     @Override
