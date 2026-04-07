@@ -189,6 +189,42 @@ public class TrainApp {
         } else {
             System.out.println("Bogie ID " + searchKey + " NOT FOUND.");
         }
+        // ================= UC19: Binary Search =================
+
+        System.out.println("\n--- UC19: Binary Search for Bogie ID ---");
+
+// Sorted array (VERY IMPORTANT for binary search)
+        String[] sortedIds = {"BG101", "BG205", "BG309", "BG412", "BG550"};
+
+// Search key
+        String key = "BG309";
+
+        int low = 0;
+        int high = sortedIds.length - 1;
+        boolean foundBinary = false;
+
+        while (low <= high) {
+
+            int mid = (low + high) / 2;
+
+            int comparison = key.compareTo(sortedIds[mid]);
+
+            if (comparison == 0) {
+                foundBinary = true;
+                break;
+            } else if (comparison > 0) {
+                low = mid + 1;   // search right
+            } else {
+                high = mid - 1;  // search left
+            }
+        }
+
+// Display result
+        if (foundBinary) {
+            System.out.println("Bogie ID " + key + " FOUND using Binary Search.");
+        } else {
+            System.out.println("Bogie ID " + key + " NOT FOUND.");
+        }
 
         // ================= FINAL =================
         System.out.println("\n=== SYSTEM EXECUTION COMPLETE ===");
