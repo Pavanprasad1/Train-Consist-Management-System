@@ -148,6 +148,21 @@ public class TrainApp {
         }
 
         System.out.println("Sorted Capacities: " + Arrays.toString(capacities));
+        // ================= UC17: Arrays.sort() =================
+
+        System.out.println("\n--- UC17: Sort Bogie Names (Arrays.sort) ---");
+
+// Array of bogie names
+        String[] bogieNames = {"Sleeper", "AC Chair", "First Class", "General", "Luxury"};
+
+// Display original
+        System.out.println("Original Names: " + Arrays.toString(bogieNames));
+
+// Sort using built-in method
+        Arrays.sort(bogieNames);
+
+// Display sorted result
+        System.out.println("Sorted Names: " + Arrays.toString(bogieNames));
 
         // ================= FINAL =================
         System.out.println("\n=== SYSTEM EXECUTION COMPLETE ===");
