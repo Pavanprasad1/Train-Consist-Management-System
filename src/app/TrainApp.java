@@ -115,12 +115,10 @@ public class TrainApp {
         GoodsBogie bogie2 = new GoodsBogie("Rectangular", "None");
 
         try {
-            // Safe
             bogie1.assignCargo("Petroleum");
             System.out.println("Cargo assigned to Cylindrical bogie: Petroleum");
 
-            // Unsafe
-            bogie2.assignCargo("Petroleum");
+            bogie2.assignCargo("Petroleum"); // unsafe
 
         } catch (CargoSafetyException e) {
             System.out.println("Error: " + e.getMessage());
@@ -130,6 +128,26 @@ public class TrainApp {
         }
 
         System.out.println("System continues running safely...");
+
+        // ================= UC16: Bubble Sort =================
+        System.out.println("\n--- UC16: Bubble Sort (Manual Sorting) ---");
+
+        int[] capacities = {72, 56, 24, 70, 60};
+
+        System.out.println("Original Capacities: " + Arrays.toString(capacities));
+
+        for (int i = 0; i < capacities.length - 1; i++) {
+            for (int j = 0; j < capacities.length - i - 1; j++) {
+
+                if (capacities[j] > capacities[j + 1]) {
+                    int temp = capacities[j];
+                    capacities[j] = capacities[j + 1];
+                    capacities[j + 1] = temp;
+                }
+            }
+        }
+
+        System.out.println("Sorted Capacities: " + Arrays.toString(capacities));
 
         // ================= FINAL =================
         System.out.println("\n=== SYSTEM EXECUTION COMPLETE ===");
